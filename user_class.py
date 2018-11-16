@@ -16,35 +16,62 @@ class User(object):
 		self.time = time_arg
 
 
-	def output_fullname(self):
-		fullName = self.lastname + " " + self.lastname
-
-
 	def change_email(self,new_email):
+		""" This function allows an email to be changed or added.
+
+		Args:
+			self: This is the object that will call the function.
+			new_email: This will be the string that marks the new user email.
+
+		Returns:
+			Nothing, only changes.	
+
+
+		"""
 		self.__email = new_email
 
 
 	def add_HR(self,new_HR):
+		""" This function allows a Heart Rate to be added to the Numpy array of HR.
+
+		Args:
+			self: This is the object that will call the function.
+			new_HR: Float or Integer that will be appended.
+
+		Returns:
+			Nothing, only changes.	
+
+
+		"""
 		self.__HR = np.append(self.HR, new_HR) 
 
 
 	def change_AvgHR(self,new_AvgHR):
+		""" This function allows an AvgHR to be changed or added.
+
+		Args:
+			self: This is the object that will call the function.
+			new_AvgHR: This will be a float that shows Average heart rate.
+
+		Returns:
+			Nothing, only changes.	
+
+
+		"""
 		self.__AvgHR = new_AvgHR 
 
 
 	def add_time(self,new_time):
+		""" This function allows a time to be added to the list of times.
+
+		Args:
+			self: This is the object that will call the function.
+			new_time: String that gets added to list
+
+		Returns:
+			Nothing, only changes.	
+
+
+		"""
 		myT = self.time
-		self.__HR = myT.append(new_time) 
-
-
-
-
-
-
-	@property
-	def w(self):
-		return self._weight
-
-	# or @w.setter
-	def set_weight(self,input):
-		self.__weight = input
+		self.__time = myT.append(new_time) 
