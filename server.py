@@ -5,6 +5,17 @@ import datetime
 
 myUsers = [] ;
 
+
+
+
+@app.route("heart_rate/<name>", methods = ["GET"])
+def get_heartrate():
+	myName = "{}".format(name)
+	myResults = dataRetreiver(myName, "HR")
+
+	return myResults
+
+
 @app.route("/hear_rate", methods=["POST"])
 def heart_rate():
 	r = request.get_json()
@@ -58,6 +69,27 @@ def checkNewU(us_email):
 def calcAv(thisUser):
 	thisUser.calc_AvgHR()
 	return thisUser
+
+
+def dataRetreiver(name, prop):
+	myResults = checkNewU(name)
+
+	if not myResults[0]:
+		raise ValueError("Error: User does not exist, please submit User data and try again.")
+		return False, 440
+
+	myObj = myResults[1]
+	if prop == "AvgHR":
+		myData = myObj.AvgHR
+	if prop == "HR":
+		myData = myObj.HR
+	if prop == "age":
+		myData = myObj.age
+	
+	myDir = {"Heart Rates": myData}
+
+	return jsonify(myDir), 200
+
 
 
 if __name__ == '__main__':
