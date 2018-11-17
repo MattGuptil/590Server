@@ -9,5 +9,9 @@
   "test_change_AvgHR.py::test_changeAvgHR2[-1.0--20-False]": true,
   "test_change_AvgHR.py::test_changeAvgHR2[0.0-0-False]": true,
   "test_change_AvgHR.py::test_changeAvgHR2[0.0-0.0-True]": true,
-  "test_change_AvgHR.py::test_changeAvgHR2[0.0-10-False]": true
+  "test_change_AvgHR.py::test_changeAvgHR2[0.0-10-False]": true,
+  "test_create_NewUser.py::test_changeAvgHR2[d-1-1-0.0-time3-True]": true,
+  "test_create_NewUser.py::test_changeAvgHR2[d-1-1-0.0-time4-True]": true,
+  "test_create_NewUser.py::test_changeAvgHR2[d-1-1-0.0-time5-True]": true,
+  "test_create_NewUser.py::test_changeAvgHR2[d-1-1-1.0-time4-True]": true
 }

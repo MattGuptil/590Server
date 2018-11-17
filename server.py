@@ -51,7 +51,7 @@ def heart_rate():
 	email = r['user_email']
 	HR = r['heart_rate']
 	age = r['user_age']
-	time = datetime.datetime.now()
+	time = datetime.datetime.now() ### gotta make this into a string....
 
 	newUser = checkNewU(email)
 	if not newUser[0]:

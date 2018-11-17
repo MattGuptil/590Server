@@ -22,6 +22,8 @@ def create_NewUser(myE, myHR, myA, myAvg, myTi):
 	"""
 	if not isinstance(myE, str) or not isinstance(myA, int) or not isinstance(myTi, list) or not isinstance(myAvg, float):
 		raise TypeError("Error: Values did not match correct types. Please try again.")
+	if not isinstance(myHR, int) and not isinstance(myHR, float):
+		raise TypeError("Error: Values did not match correct types. Please try again.")
 	myHR = np.array([myHR])
 	x = User(myE, myA, myHR, myAvg, myTi)
 	return x
