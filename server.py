@@ -14,7 +14,7 @@ def heart_rate():
 	time = datetime.datetime.now()
 
 	newUser = checkNewU(email)
-	if newUser[0]:
+	if not newUser[0]:
 		myU = create_NewUser(email, HR, age, 60, time)
 	else:
 		myU = addto_User(newUser[1], HR, age, time)
@@ -48,11 +48,16 @@ def addto_User(myUse, myHR, myA, myTi):
 	return myUse
 
 
-## Finish later also make sure it returns the User object
 def checkNewU(us_email):
 	for key in myUsers:
 		if key.email() == us_email:
 			return [True, key]
+	return [False, 0]
+
+
+def myAv(thisUser):
+	
+
 
 if __name__ == '__main__':
 	app.run(host="0.0.0.0")
