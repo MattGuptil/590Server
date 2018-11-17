@@ -28,6 +28,9 @@ class User(object):
 
 
 		"""
+
+		if not isinstance(new_age, int) or new_age is None:
+			raise TypeError("Error: Age Entered was not an integer. Please Input a correct age.")
 		self.__age = new_age
 
 
@@ -43,6 +46,8 @@ class User(object):
 
 
 		"""
+		if not isinstance(new_HR, int) or new_HR is None:
+			raise TypeError("Error: HR entered was not an integer.")
 		self.__HR = np.append(self.HR, new_HR) 
 
 
@@ -58,6 +63,8 @@ class User(object):
 
 
 		"""
+		if not isinstance(new_AvgHR, int) or new_AvgHR is None:
+			raise TypeError("Error: AvgHR entered was not an integer.")
 		self.__AvgHR = new_AvgHR 
 
  
@@ -73,6 +80,8 @@ class User(object):
 
 
 		"""
+		if not isinstance(new_time, str) or new_time is None:
+			raise TypeError("Error: Time entered was not a string.")
 		myT = self.time
 		self.__time = myT.append(new_time) 
 
