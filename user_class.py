@@ -73,17 +73,17 @@ class User(object):
 
 		Args:
 			self: This is the object that will call the function.
-			new_time: String that gets added to list
+			new_time: List containing String that gets added to list
 
 		Returns:
 			Nothing, only changes.	
 
 
 		"""
-		if not isinstance(new_time, str) or new_time is None:
+		if not isinstance(new_time, list) or new_time is None or not isinstance(new_time[0], str):
 			raise TypeError("Error: Time entered was not a string.")
 		myT = self.time
-		self.time = myT.append(new_time) 
+		self.time = myT + new_time
 
 
 	def calc_AvgHR(self):

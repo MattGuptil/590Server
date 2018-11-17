@@ -3,15 +3,15 @@ from server_methods import create_NewUser
 import pytest
 import numpy as np
 
-@pytest.mark.parametrize('oldahr, newahr, expect', [
+@pytest.mark.parametrize('oldahr, newahr', [
 
-	(0.0, 10.0, np.array([0, 10])),
-	(-1.0, -20.0, np.array([-1, -20])),
-	(0.0, 0.0, np.array([0, 0])),
+	(0.0, 10.0),
+	(-1.0, -20.0),
+	(0.0, 0.0),
 
 	])
-def test_changeavgHR(oldahr, newahr, expect):
-	myobj = create_NewUser('hold', 0, 1, oldahr, 'str')
+def test_changeavgHR(oldahr, newahr):
+	myobj = create_NewUser('hold', 0, 1, oldahr, ['str'])
 
 	myobj.change_AvgHR(newahr)
 
@@ -37,7 +37,7 @@ def test_changeavgHR(oldahr, newahr, expect):
 
 	])
 def test_changeAvgHR2(oldahr, newahr, expect):
-	myobj = create_NewUser('hold', 1, 1, oldahr, 'str')
+	myobj = create_NewUser('hold', 1, 1, oldahr, ['str'])
 
 	try:
 		myobj.change_AvgHR(newahr)
