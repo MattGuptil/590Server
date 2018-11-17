@@ -19,7 +19,7 @@ def heart_rate():
 	else:
 		myU = addto_User(newUser[1], HR, age, time)
 
-
+	myU = calcAv(myU)
 	myUsers.append(myU)
 	return
 
@@ -55,8 +55,9 @@ def checkNewU(us_email):
 	return [False, 0]
 
 
-def myAv(thisUser):
-	
+def calcAv(thisUser):
+	thisUser.calc_AvgHR()
+	return thisUser
 
 
 if __name__ == '__main__':
