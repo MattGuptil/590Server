@@ -19,7 +19,8 @@ def test_addHR(oldhr, newhr, expect):
 		np.testing.assert_equal(myobj.HR, expect)
 	except AssertionError:
 		assert False
-"""
+
+
 @pytest.mark.parametrize('oldage, newage, expect', [
 
 	(0, 10, False),
@@ -30,16 +31,16 @@ def test_addHR(oldhr, newhr, expect):
 	(0, [1], True),
 	(0, (1, 0), True),
 	(0, np.array([1, 2]), True),
+	(0, None, True),
 
 	])
-def test_changeage2(oldage, newage, expect):
+def test_addHR2(oldage, newage, expect):
 	myobj = create_NewUser('hold', 1, oldage, 0.0, 'str')
 
 	try:
-		myobj.change_age(newage)
+		myobj.add_HR(newage)
 		myb = False
 	except TypeError:
 		myb = True
 	finally:
 		assert myb == expect
-"""

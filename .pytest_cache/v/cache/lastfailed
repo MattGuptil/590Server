@@ -1,1 +1,6 @@
-{}
+{
+  "test_change_AvgHR.py::test_changeAvgHR2[-1.0--20-False]": true,
+  "test_change_AvgHR.py::test_changeAvgHR2[0.0-0-False]": true,
+  "test_change_AvgHR.py::test_changeAvgHR2[0.0-0.0-True]": true,
+  "test_change_AvgHR.py::test_changeAvgHR2[0.0-10-False]": true
+}

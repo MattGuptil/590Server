@@ -63,8 +63,8 @@ class User(object):
 
 
 		"""
-		if not isinstance(new_AvgHR, int) or new_AvgHR is None:
-			raise TypeError("Error: AvgHR entered was not an integer.")
+		if not isinstance(new_AvgHR, float) or new_AvgHR is None:
+			raise TypeError("Error: AvgHR entered was not a float.")
 		self.AvgHR = new_AvgHR 
 
  
