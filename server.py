@@ -44,6 +44,8 @@ def heart_rate():
 
 	"""
 	r = request.get_json()
+
+	### add code to validate entries.
 	email = r['user_email']
 	HR = r['heart_rate']
 	age = r['user_age']
@@ -74,6 +76,8 @@ def create_NewUser(myE, myHR, myA, myAvg, myTi):
 
 
 	"""
+	if not isinstance(myE, str) or not isinstance(myHR, int) or not isinstance(myA, int) or
+	not isinstance(myTi, str) or not isinstance(myAvg, int):
 	x = User(myE, myHR, myA, myAvg, myTi)
 	return x
 
@@ -92,6 +96,9 @@ def addto_User(myUse, myHR, myA, myTi):
 
 
 	"""
+	if not isinstance(myUse, User) or not isinstance(myHR, int) or not isinstance(myA, int) or
+	not isinstance(myTi, str):
+		raise TypeError("Error: Values did not match correct types. Please try again.")
 	myUse.change_age(myA)
 	myUse.add_HR(myHR)
 	myUse.add_time(myTi)
@@ -109,6 +116,8 @@ def checkNewU(us_email):
 
 
 	"""
+	if not isinstance(us_email, str) or us_email is None:
+		raise TypeError("Error: Value entered was not a String. Can not be compared.")
 	for key in myUsers:
 		if key.email() == us_email:
 			return [True, key]
@@ -126,6 +135,8 @@ def calcAv(thisUser):
 
 
 	"""
+	if not isinstance(thisUser, User) or thisUser is None:
+		raise TypeError("Error: The type of variable entered was not a User Object.")
 	thisUser.calc_AvgHR()
 	return thisUser
 
@@ -153,10 +164,12 @@ def dataRetreiver(name, prop):
 	myObj = myResults[1]
 	if prop == "AvgHR":
 		myData = myObj.AvgHR
-	if prop == "HR":
+	else if prop == "HR":
 		myData = myObj.HR
-	if prop == "age":
+	else if prop == "age":
 		myData = myObj.age
+	else:
+		raise ValueError("Fatal: A valid object property was not called. Debugging Needed.")
 	
 	myDir = {"Heart Rates": myData} ## probable have to add {}".format(myData)
 
