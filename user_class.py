@@ -16,19 +16,19 @@ class User(object):
 		self.time = time_arg
 
 
-	def change_email(self,new_email):
-		""" This function allows an email to be changed or added.
+	def change_age(self,new_age):
+		""" This function allows an age to be changed or added.
 
 		Args:
 			self: This is the object that will call the function.
-			new_email: This will be the string that marks the new user email.
+			new_eage: This will be the string that marks the new user age.
 
 		Returns:
 			Nothing, only changes.	
 
 
 		"""
-		self.__email = new_email
+		self.__age = new_age
 
 
 	def add_HR(self,new_HR):
@@ -60,7 +60,7 @@ class User(object):
 		"""
 		self.__AvgHR = new_AvgHR 
 
-
+ 
 	def add_time(self,new_time):
 		""" This function allows a time to be added to the list of times.
 
@@ -75,3 +75,18 @@ class User(object):
 		"""
 		myT = self.time
 		self.__time = myT.append(new_time) 
+
+
+	def calc_AvgHR(self):
+		""" This function will calculate and return the average heart rate.
+
+		Args:
+			self: The object that heart rate data will be taken from.
+
+		Returns:
+			Nothing, just changes the average heart rate value which is a float64
+
+		"""
+		myData = self.HR
+		myAv = np.mean(myData)
+		self.__AvgHR = myAv
