@@ -6,10 +6,15 @@ import datetime
 myUsers = [] ;
 
 
+@app.route("/heart_rate/average/<name>", methods = ["GET"])
+def get_avgHR(name):
+	myName = "{}".format(name)
+	myResults = dataRetreiver(myName, "AvgHR")
 
+	return myResults
 
 @app.route("heart_rate/<name>", methods = ["GET"])
-def get_heartrate():
+def get_heartrate(name):
 	myName = "{}".format(name)
 	myResults = dataRetreiver(myName, "HR")
 
@@ -86,7 +91,7 @@ def dataRetreiver(name, prop):
 	if prop == "age":
 		myData = myObj.age
 	
-	myDir = {"Heart Rates": myData}
+	myDir = {"Heart Rates": myData} ## probable have to add {}".format(myData)
 
 	return jsonify(myDir), 200
 
