@@ -65,5 +65,42 @@ def heart_rate():
 	myUsers.append(myU)
 	return
 
+@app.route("/heart_rate/interval_average", methods=["POST"])
+def interval_average():
+	""" This is the POST function that allows a user to get HR average over interval.
+
+	Returns:
+		Dictionary jsonified, of the average heart rate over an interval.		
+
+
+	"""
+	r = request.get_json()
+
+	email = r['user_email']
+	trange = r['hear_rate_average_since']
+
+	newt = datetime.strptime(trange, "%Y-%m-%d %I:%M:%S.%f")
+
+
+	holder = checkNewU(email)
+	if not holder[0]:
+		raise ValueError("Error: User does not currently exist, please first enter user data then attempt this.")
+	i = 0
+	j = 0
+	for each in holder[1].time:
+		myt = datetime.strptime(each, "%Y-%m-%d %I:%M:%S.%f")
+		if i == len(holder[1].time):
+			j = -1
+			break
+		if newt <= myt :
+			j = i
+			break
+		i= i+1
+
+	if j == -1:
+		return {"Bad Date": 'Try Again'}
+
+
+
 if __name__ == '__main__':
 	app.run(host="0.0.0.0")
