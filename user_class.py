@@ -34,7 +34,7 @@ class User(object):
 		self.age = new_age
 
 
-def change_age(self,new_id):
+	def change_id(self,new_id):
 		""" This function allows an id to be changed or added.
 
 		Args:
