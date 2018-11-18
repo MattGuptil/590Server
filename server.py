@@ -18,7 +18,7 @@ def get_avgHR(name):
 
 	"""
 	myName = "{}".format(name)
-	myResults = dataRetreiver(myName, "AvgHR")
+	myResults = dataRetreiver(myName, "AvgHR") ## Need to jsonify dictionary
 
 	return myResults
 
@@ -32,7 +32,7 @@ def get_heartrate(name):
 
 	"""
 	myName = "{}".format(name)
-	myResults = dataRetreiver(myName, "HR")
+	myResults = dataRetreiver(myName, "HR") ## jsonify dictionary ## see note on line 122 of server_methods
 
 	return myResults
 
