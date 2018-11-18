@@ -8,6 +8,15 @@ import json
 app = Flask(__name__)
 
 myUsers = [] ;
+Allowed_keys = [
+
+	"patient_id",
+	"attending_email",
+	"heart_rate",
+	"heart_rate_average_since",
+	"user_age"
+
+]
 
 
 @app.route("/status/<name>", methods = ["GET"])
@@ -49,7 +58,7 @@ def get_heartrate(name):
 	myName = "{}".format(name)
 	#print("AHHHHHHHHHHHHHHHH", myUsers[0].id)
 	myResults = dataRetreiver(myName, "HR") ## jsonify dictionary ## see note on line 122 of server_methods
-	print("AHHHHHHHHHHHHHHHH", myResults)
+	#print("AHHHHHHHHHHHHHHHH", myResults)
 	return jsonify(myResults), 200
 
 
@@ -63,7 +72,10 @@ def new_patient():
 
 	"""
 	r = request.get_json()
-
+	try:
+		validate_request(r)
+	except TypeError:
+		return jsonify({"message": 'wrong format'}), 500
 	### add code to validate entries.
 	email = r['attending_email']
 	#HR = r['heart_rate']
@@ -93,6 +105,10 @@ def heart_rate():
 
 	"""
 	r = request.get_json()
+	try:
+		validate_request(r)
+	except TypeError:
+		return jsonify({"message": 'wrong format'}), 500
 
 	myid = r['patient_id']
 	myhr = r['heart_rate']
@@ -127,7 +143,10 @@ def interval_average():
 
 	"""
 	r = request.get_json()
-
+	try:
+		validate_request(r)
+	except TypeError:
+		return jsonify({"message": 'wrong format'}), 500
 	myid = r['patient_id']
 	trange = r['heart_rate_average_since']
 
@@ -135,6 +154,28 @@ def interval_average():
 	mydict = timeSorter(myid,newt)
 
 	return jsonify(mydict), 200
+
+
+def validate_request(req):
+	""" This function was leveraged from Suyash Kumar and his server.py script with class files.
+
+	Args:
+		req: request object with headers
+
+	Returns:
+		Nothing
+
+	Raises:
+		ValidationError: If key is not within acceptable keys then this returns a bad value.
+
+
+	"""
+	req = req.keys()
+
+	for key in req:
+		if key not in Allowed_keys:
+			raise TypeError("Key '{0}' not present in request".format(key))
+
 
 
 def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
