@@ -9,7 +9,7 @@ import numpy as np
 
 @pytest.mark.parametrize('faulty, expect', [
 
-	(create_NewUser('hold', 1, 1, 0.0, ['str']), False),
+	(create_NewUser('hold', 1, 1, 0.0, ['str'], '1'), False),
 	(60, True),
 	(-20, True),
 	(None, True),
@@ -18,7 +18,7 @@ import numpy as np
 	])
 def test_calcAvg3(faulty, expect):
 
-	myobj = create_NewUser('hold', 1, 1, 0.0, ['str'])
+	#myobj = create_NewUser('hold', 1, 1, 0.0, ['str'], '1')
 
 	try:
 		myobj = calcAv(faulty)
@@ -39,7 +39,7 @@ def test_calcAvg3(faulty, expect):
 
 	])
 def test_calcAvg(oldhr, expect):
-	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'])
+	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'], '1')
 
 	myobj = calcAv(myobj)
 
@@ -58,7 +58,7 @@ def test_calcAvg(oldhr, expect):
 
 	])
 def test_calcAvg2(oldhr, expect):
-	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'])
+	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'], '1')
 	for x in range(10):
 		myobj.add_HR(oldhr)
 

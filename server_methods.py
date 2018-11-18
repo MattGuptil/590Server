@@ -51,12 +51,12 @@ def addto_User(myUse, myHR, myTi):
 	myArray = myUse.HR
 	if myArray[0] == 0:
 		myArray = np.delete(myArray, 0)
-	myU.HR = myArray ## this might have to change confirm it actually changes
-	myU = calcAv(myUse)
-	if myU.time[0] == ' ':
-		del myU.time[0]
+	myUse.HR = myArray ## this might have to change confirm it actually changes
+	myUse = calcAv(myUse)
+	if myUse.time[0] == ' ':
+		del myUse.time[0]
 
-	return myU
+	return myUse
 
 
 def checkNewU(us_ID):
@@ -140,7 +140,20 @@ def dataRetreiver(name, prop):
 
 
 def timeSorter(myid, newt):
+	""" This function grab the patient id and time given and then finds the average over the interval.
 
+	Args:
+		myid: String, that reps patient id.
+		newt: String, represents the time that the user entered to find average time after this has occured.
+
+	Returns:
+		Dictionary containing avg value.
+
+	Raises:
+		ValueError: If the user does not exist.
+
+
+	"""
 	holder = checkNewU(myid)
 	if not holder[0]:
 		raise ValueError("Error: User does not currently exist, please first enter user data then attempt this.")

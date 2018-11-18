@@ -12,7 +12,7 @@ import numpy as np
 
 	])
 def test_addtime(oldtime, newtime, expect):
-	myobj = create_NewUser('hold', 0, 1, 0.0, oldtime)
+	myobj = create_NewUser('hold', 0, 1, 0.0, oldtime, '1')
 
 	myobj.add_time(newtime)
 
@@ -36,7 +36,7 @@ def test_addtime(oldtime, newtime, expect):
 
 	])
 def test_addtime2(oldtime, newtime, expect):
-	myobj = create_NewUser('hold', 1, 1, 0.0, oldtime)
+	myobj = create_NewUser('hold', 1, 1, 0.0, oldtime, '1')
 
 	try:
 		myobj.add_time(newtime)

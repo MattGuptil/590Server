@@ -16,7 +16,7 @@ import numpy as np
 
 	])
 def test_calcAvg(oldhr, expect):
-	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'])
+	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'], '1')
 
 	myobj.calc_AvgHR()
 
@@ -35,7 +35,7 @@ def test_calcAvg(oldhr, expect):
 
 	])
 def test_calcAvg2(oldhr, expect):
-	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'])
+	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'], '1')
 	for x in range(10):
 		myobj.add_HR(oldhr)
 

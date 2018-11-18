@@ -11,7 +11,7 @@ import numpy as np
 
 	])
 def test_addHR(oldhr, newhr, expect):
-	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'])
+	myobj = create_NewUser('hold', oldhr, 1, 0.0, ['str'], '1')
 
 	myobj.add_HR(newhr)
 
@@ -35,7 +35,7 @@ def test_addHR(oldhr, newhr, expect):
 
 	])
 def test_addHR2(oldage, newage, expect):
-	myobj = create_NewUser('hold', 1, oldage, 0.0, ['str'])
+	myobj = create_NewUser('hold', 1, oldage, 0.0, ['str'], '1')
 
 	try:
 		myobj.add_HR(newage)
