@@ -21,7 +21,7 @@ def get_status(name):
 	myName = "{}".format(name)
 	myResults = dataRetreiver(myName, "status") ## Need to jsonify dictionary
 
-	return myResults
+	return jsonify(myResults), 200
 
 
 @app.route("/heart_rate/average/<name>", methods = ["GET"])
@@ -95,7 +95,7 @@ def heart_rate():
 	r = request.get_json()
 
 	myid = r['patient_id']
-	myhr = r['hear_rate']
+	myhr = r['heart_rate']
 	myhr = int(myhr)
 	time = datetime.datetime.now() ### gotta make this into a string....
 	time = time.strftime("%Y-%m-%d %I:%M:%S.%f")
@@ -105,7 +105,7 @@ def heart_rate():
 	if not newUser[0]:
 		raise ValueError("User does not yet exist try another patient id or create a new user.")
 	else:
-		myU = addto_User(myU, myHR, [myTi])
+		myU = addto_User(myU, myhr, [time])
 		del myUsers[newUser[2]]
 		myUsers.append(myU)
 
@@ -114,7 +114,7 @@ def heart_rate():
 	#if isTac:
 		###send an email
 
-	return
+	return jsonify({'Num users': len(myUsers), 'Newuse': isTac}), 200
 
 
 @app.route("/heart_rate/interval_average", methods=["POST"])
