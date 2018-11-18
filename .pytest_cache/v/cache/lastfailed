@@ -28,5 +28,7 @@
   "test_dataRetreiver.py::test_dataRetreiver[hold-AvgHR-expect0]": true,
   "test_dataRetreiver.py::test_dataRetreiver[hold-HR-expect1]": true,
   "test_dataRetreiver.py::test_dataRetreiver[hold-age-expect2]": true,
-  "test_dataRetreiver.py::test_dataRetreiver[hold-status-expect2]": true
+  "test_dataRetreiver.py::test_dataRetreiver[hold-status-expect2]": true,
+  "test_timeSorter.py::test_dataRetreiver[1-expect0]": true,
+  "test_timeSorter.py::test_timeSorter[1-expect0]": true
 }

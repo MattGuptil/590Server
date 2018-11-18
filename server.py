@@ -128,9 +128,9 @@ def interval_average():
 	r = request.get_json()
 
 	myid = r['patient_id']
-	trange = r['hear_rate_average_since']
+	trange = r['heart_rate_average_since']
 
-	newt = datetime.strptime(trange, "%Y-%m-%d %I:%M:%S.%f")
+	newt = datetime.datetime.strptime(trange, "%Y-%m-%d %I:%M:%S.%f")
 	mydict = timeSorter(myid,newt)
 
 	return jsonify(mydict), 200

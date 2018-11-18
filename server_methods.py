@@ -160,7 +160,7 @@ def timeSorter(myid, newt):
 	i = 0
 	j = 0
 	for each in holder[1].time:
-		myt = datetime.strptime(each, "%Y-%m-%d %I:%M:%S.%f")
+		myt = datetime.datetime.strptime(each, "%Y-%m-%d %I:%M:%S.%f")
 		if i == len(holder[1].time)-1:
 			j = -1
 			break
@@ -173,12 +173,14 @@ def timeSorter(myid, newt):
 		return {"Bad Date": 'Try Again'}
 
 	k = 0
+	z = 0
 	avgholder = 0.0
 	for each in holder[1].HR:
 		if k >= j:
 			avgholder = avgholder + each
+			z = z + 1
 		k = k + 1
-	avgholder = avgholder/float(len(avgholder))
+	avgholder = avgholder/float(z)
 
 	mydict = {'Avg Heart Rate over your Interval': avgholder}
 
@@ -186,6 +188,21 @@ def timeSorter(myid, newt):
 
 
 def isTachy(hr, age):
+	""" This function checks to see if the patient is tachycardic based on age and resting hr.
+
+	Args:
+		hr: int or numpyfloat, that reps last heart rate taken.
+		age: int, age of patient.
+
+	Returns:
+		True or False based on whether or not patient is tachy.
+
+
+	"""
+
+	if not isinstance(hr, np.int32) and not isinstance(hr, int) or not isinstance(age, int):
+		raise TypeError("Error: hr or age was not correct type.", type(hr))
+
 	if hr > 151 and age >=1 and age <= 2:
 		return True
 	elif hr >137 and age >=3 and age <= 4:

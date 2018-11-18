@@ -98,5 +98,16 @@
   "test_dataRetreiver.py::test_dataRetreiver2[mobj3-hold1-status-True]",
   "test_dataRetreiver.py::test_dataRetreiver2[mobj4-hold-ag-True]",
   "test_dataRetreiver.py::test_dataRetreiver2[mobj5-hold-21-True]",
-  "test_dataRetreiver.py::test_dataRetreiver2[mobj6-hold1-prp6-True]"
+  "test_dataRetreiver.py::test_dataRetreiver2[mobj6-hold1-prp6-True]",
+  "test_isTachy.py::test_isTachy[60-20-False]",
+  "test_isTachy.py::test_isTachy[101-20-True]",
+  "test_isTachy.py::test_isTachy[152-1-True]",
+  "test_isTachy.py::test_isTachy[101-2-False]",
+  "test_isTachy.py::test_isTachy[1140-3-True]",
+  "test_isTachy.py::test_isTachy[101-3-False]",
+  "test_isTachy.py::test_isTachy[120-13-True]",
+  "test_isTachy.py::test_isTachy[101-12-False]",
+  "test_isTachy.py::test_isTachy[60-6-False]",
+  "test_isTachy.py::test_isTachy[134-6-True]",
+  "test_timeSorter.py::test_timeSorter[-1-expect0]"
 ]
