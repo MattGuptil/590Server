@@ -7,15 +7,15 @@ import numpy as np
 @pytest.mark.parametrize('new,  expect', [
 
 	('str', False),
-	('hold', True),
-	('hold3', True)
+	('1', True),
+	('2', True)
 
 
 
 	])
 def test_checkNewU(new,  expect):
-	myobj = create_NewUser('hold', 1, 1, 0.0, ['str', 'str'])
-	myobj2 = create_NewUser('hold3', 1, 1, 0.0, ['str', 'str'])
+	myobj = create_NewUser('hold', 1, 1, 0.0, ['str', 'str'], '1')
+	myobj2 = create_NewUser('hold3', 1, 1, 0.0, ['str', 'str'], '2')
 
 	myUsers.append(myobj)
 	myUsers.append(myobj2)
@@ -43,8 +43,8 @@ def test_checkNewU(new,  expect):
 
 	])
 def test_checkNewU2(new,  expect):
-	myobj = create_NewUser('hold', 1, 1, 0.0, ['str', 'str'])
-	myobj2 = create_NewUser('hold3', 1, 1, 0.0, ['str', 'str'])
+	myobj = create_NewUser('hold', 1, 1, 0.0, ['str', 'str'], '1')
+	myobj2 = create_NewUser('hold3', 1, 1, 0.0, ['str', 'str'], '1')
 
 	myUsers.append(myobj)
 	myUsers.append(myobj2)
@@ -56,3 +56,4 @@ def test_checkNewU2(new,  expect):
 		myb = True
 	finally:
 		assert myb == expect
+

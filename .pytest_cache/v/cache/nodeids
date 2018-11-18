@@ -1,1 +1,12 @@
-[]
+[
+  "test_checkNewU.py::test_checkNewU[str-False]",
+  "test_checkNewU.py::test_checkNewU[1-True]",
+  "test_checkNewU.py::test_checkNewU[2-True]",
+  "test_checkNewU.py::test_checkNewU2[str-False]",
+  "test_checkNewU.py::test_checkNewU2[hold-False]",
+  "test_checkNewU.py::test_checkNewU2[hold3-False]",
+  "test_checkNewU.py::test_checkNewU2[1-True]",
+  "test_checkNewU.py::test_checkNewU2[1.0-True]",
+  "test_checkNewU.py::test_checkNewU2[None-True]",
+  "test_checkNewU.py::test_checkNewU2[new6-True]"
+]

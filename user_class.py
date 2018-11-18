@@ -6,7 +6,7 @@ class User(object):
 
 	#The "self" has to be first parameter
 	def __init__(self, email_arg, age_arg = 0, HR_arg = np.array([]), 
-		AvgHR_arg = 0.0, time_arg = [], id_arg):
+		AvgHR_arg = 0.0, time_arg = [], id_arg = '-1'):
 
 		# two underscores __ will hide it
 		self.email = email_arg
@@ -14,7 +14,7 @@ class User(object):
 		self.age = age_arg
 		self.AvgHR = AvgHR_arg
 		self.time = time_arg
-		self.arg = id_arg
+		self.id = id_arg
 
 	def change_age(self,new_age):
 		""" This function allows an age to be changed or added.

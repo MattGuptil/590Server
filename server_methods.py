@@ -6,7 +6,7 @@ import requests
 import json
 from server import myUsers
 
-def create_NewUser(myE, myHR, myA, myAvg, myT, myID):
+def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
 	""" This function creates a new User object with associated input values.
 
 	Args:
@@ -71,7 +71,7 @@ def checkNewU(us_ID):
 
 	"""
 	## might have to remove user then add it back
-	if not isinstance(us_ID, str) or us_id is None:
+	if not isinstance(us_ID, str) or us_ID is None:
 		raise TypeError("Error: Value entered was not a String. Can not be compared.")
 	i = 0
 	for key in myUsers:

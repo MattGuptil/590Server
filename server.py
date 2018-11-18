@@ -4,9 +4,24 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
+from server_methods import *
 app = Flask(__name__)
 
 myUsers = [] ;
+
+
+@app.route("/status/<name>", methods = ["GET"])
+def get_status(name):
+	""" This GET function grabs the AvgHR for a user.
+
+	Returns:
+		A dictionary of the AvgHR in JSON dictionary form.
+
+	"""
+	myName = "{}".format(name)
+	myResults = dataRetreiver(myName, "status") ## Need to jsonify dictionary
+
+	return myResults
 
 
 @app.route("/heart_rate/average/<name>", methods = ["GET"])
@@ -49,9 +64,10 @@ def new_patient():
 	r = request.get_json()
 
 	### add code to validate entries.
-	email = r['user_email']
+	email = r['attending_email']
 	#HR = r['heart_rate']
 	age = r['user_age']
+	age = int(age)
 	#time = datetime.datetime.now() ### gotta make this into a string....
 	#time = time.strftime("%Y-%m-%d %I:%M:%S.%f")
 	myID = r['patient_id']
@@ -79,6 +95,7 @@ def heart_rate():
 
 	myid = r['patient_id']
 	myhr = r['hear_rate']
+	myhr = int(myhr)
 	time = datetime.datetime.now() ### gotta make this into a string....
 	time = time.strftime("%Y-%m-%d %I:%M:%S.%f")
 
@@ -87,9 +104,15 @@ def heart_rate():
 	if not newUser[0]:
 		raise ValueError("User does not yet exist try another patient id or create a new user.")
 	else:
-		myU = addto_User(myU, myHR, myTi)
+		myU = addto_User(myU, myHR, [myTi])
 		del myUsers[newUser[2]]
 		myUsers.append(myU)
+
+
+	isTac = isTachy(myhr, myU.age)
+	#if isTac:
+		###send an email
+
 	return
 
 
