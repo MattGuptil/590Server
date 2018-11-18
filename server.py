@@ -74,12 +74,12 @@ def new_patient():
 
 	newUser = checkNewU(myID)
 	if not newUser[0]:
-		myU = create_NewUser(email, 0, age, 60, [' '], myID)
+		myU = create_NewUser(email, 0, age, 60.0, [' '], myID)
 	else:
 		raise ValueError("patient_id exists please use a different patient_id")
 		
 	myUsers.append(myU)
-	return
+	return jsonify({'Num users': len(myUsers), 'Newuse': 's'}), 200
 
 
 @app.route("/heart_rate", methods=["POST"])
@@ -138,4 +138,4 @@ def interval_average():
 
 
 if __name__ == '__main__':
-	app.run(host="0.0.0.0")
+	app.run(host="127.0.0.1")

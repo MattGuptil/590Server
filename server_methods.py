@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
-from server import myUsers
+import server
 
 def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
 	""" This function creates a new User object with associated input values.
@@ -24,7 +24,7 @@ def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
 	if not isinstance(myE, str) or not isinstance(myA, int) or not isinstance(myTi, list) or not isinstance(myAvg, float):
 		raise TypeError("Error: Values did not match correct types. Please try again.")
 	if not isinstance(myHR, int) and not isinstance(myHR, float):
-		raise TypeError("Error: Values did not match correct types. Please try again.")
+		raise TypeError("Error2: Values did not match correct types. Please try again.")
 	myHR = np.array([myHR])
 	x = User(myE, myA, myHR, myAvg, myTi, myID)
 	return x
@@ -74,11 +74,11 @@ def checkNewU(us_ID):
 	if not isinstance(us_ID, str) or us_ID is None:
 		raise TypeError("Error: Value entered was not a String. Can not be compared.")
 	i = 0
-	for key in myUsers:
+	for key in server.myUsers:
 		if key.id == us_ID:
 			return [True, key, i]
 		i = i + 1
-	return [False, 0]
+	return [False, server.myUsers]
 
 
 def calcAv(thisUser):
