@@ -41,7 +41,7 @@ def test_createUser(old, expect):
 	
 
 	])
-def test_changeAvgHR2(email, HR, Age, Avg, time, expect):
+def test_createUser2(email, HR, Age, Avg, time, expect):
 	
 
 	try:

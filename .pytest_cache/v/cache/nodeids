@@ -1,12 +1,1 @@
-[
-  "test_create_NewUser.py::test_createUser[0-0]",
-  "test_create_NewUser.py::test_changeAvgHR2[hold-1-1-0.0-time0-False]",
-  "test_create_NewUser.py::test_changeAvgHR2[1-1-1-0.0-time1-True]",
-  "test_create_NewUser.py::test_changeAvgHR2[d-s-1-0.0-time2-True]",
-  "test_create_NewUser.py::test_changeAvgHR2[d-1-0.0-0.0-time3-True]",
-  "test_create_NewUser.py::test_changeAvgHR2[d-1-1.0-1.0-time4-True]",
-  "test_create_NewUser.py::test_changeAvgHR2[d-1-1-0.0-1-True]",
-  "test_create_NewUser.py::test_changeAvgHR2[d-HR6-2.0-Avg6-time6-True]",
-  "test_create_NewUser.py::test_changeAvgHR2[d-HR7-1-1.0-time7-True]",
-  "test_create_NewUser.py::test_changeAvgHR2[d-1-1-Avg8-time8-True]"
-]
+[]

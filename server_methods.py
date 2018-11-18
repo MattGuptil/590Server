@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
+from server import myUsers
 
 def create_NewUser(myE, myHR, myA, myAvg, myTi):
 	""" This function creates a new User object with associated input values.
@@ -43,7 +44,7 @@ def addto_User(myUse, myHR, myA, myTi):
 
 
 	"""
-	if not isinstance(myUse, User) or not isinstance(myHR, int) or not isinstance(myA, int) or not isinstance(myTi, str):
+	if not isinstance(myUse, User) or not isinstance(myHR, int) or not isinstance(myA, int) or not isinstance(myTi, list):
 		raise TypeError("Error: Values did not match correct types. Please try again.")
 	myUse.change_age(myA)
 	myUse.add_HR(myHR)
