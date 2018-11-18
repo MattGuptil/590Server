@@ -6,7 +6,7 @@ class User(object):
 
 	#The "self" has to be first parameter
 	def __init__(self, email_arg, age_arg = 0, HR_arg = np.array([]), 
-		AvgHR_arg = 0.0, time_arg = []):
+		AvgHR_arg = 0.0, time_arg = [], id_arg):
 
 		# two underscores __ will hide it
 		self.email = email_arg
@@ -14,7 +14,7 @@ class User(object):
 		self.age = age_arg
 		self.AvgHR = AvgHR_arg
 		self.time = time_arg
-
+		self.arg = id_arg
 
 	def change_age(self,new_age):
 		""" This function allows an age to be changed or added.
@@ -32,6 +32,25 @@ class User(object):
 		if not isinstance(new_age, int) or new_age is None:
 			raise TypeError("Error: Age Entered was not an integer. Please Input a correct age.")
 		self.age = new_age
+
+
+def change_age(self,new_id):
+		""" This function allows an id to be changed or added.
+
+		Args:
+			self: This is the object that will call the function.
+			new_eage: This will be the int that marks the new user id.
+
+		Returns:
+			Nothing, only changes.	
+
+
+		"""
+
+		if not isinstance(new_id, int) or new_id is None:
+			raise TypeError("Error: Age Entered was not an integer. Please Input a correct age.")
+		self.id = new_id
+
 
 
 	def add_HR(self,new_HR):
