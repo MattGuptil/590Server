@@ -1,5 +1,5 @@
 from user_class import User
-from server_methods import *
+from server import *
 import pytest
 import numpy as np
 
