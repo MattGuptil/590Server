@@ -63,10 +63,12 @@ def checkNewU(us_email):
 
 
 	"""
+	print(myUsers)
 	if not isinstance(us_email, str) or us_email is None:
 		raise TypeError("Error: Value entered was not a String. Can not be compared.")
 	for key in myUsers:
-		if key.email() == us_email:
+		print(type(key))
+		if key.email == us_email:
 			return [True, key]
 	return [False, 0]
 

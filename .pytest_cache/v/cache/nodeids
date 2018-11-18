@@ -1,1 +1,5 @@
-[]
+[
+  "test_checkNewU.py::test_checkNewU[str-False]",
+  "test_checkNewU.py::test_checkNewU[hold-True]",
+  "test_checkNewU.py::test_checkNewU[hold3-True]"
+]

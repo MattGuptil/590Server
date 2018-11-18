@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
+app = Flask(__name__)
 
 myUsers = [] ;
 
@@ -21,7 +22,7 @@ def get_avgHR(name):
 
 	return myResults
 
-@app.route("heart_rate/<name>", methods = ["GET"])
+@app.route("/heart_rate/<name>", methods = ["GET"])
 def get_heartrate(name):
 	""" This GET function grabs the heart rate data of the user entered.
 

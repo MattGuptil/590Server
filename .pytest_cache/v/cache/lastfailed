@@ -6,7 +6,6 @@
   "test_add_time.py::test_addtime[str-str2-expect0]": true,
   "test_add_time.py::test_addtime[str-str3-expect1]": true,
   "test_add_time.py::test_addtime[str-strgadf-expect2]": true,
-  "test_addtoUser.py": true,
   "test_change_AvgHR.py::test_changeAvgHR2[-1.0--20-False]": true,
   "test_change_AvgHR.py::test_changeAvgHR2[0.0-0-False]": true,
   "test_change_AvgHR.py::test_changeAvgHR2[0.0-0.0-True]": true,
