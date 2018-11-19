@@ -6,6 +6,7 @@ import requests
 import json
 import server
 
+
 def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
     """ This function creates a new User object with associated input values.
 
@@ -34,7 +35,7 @@ def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
 
 
 def addto_User(myUse, myHR, myTi):
-    """ This function takes in a User object and changes age, and appends 
+    """ This function takes in a User object and changes age, and appends
         time/HR.
 
     Args:
@@ -49,7 +50,7 @@ def addto_User(myUse, myHR, myTi):
     """
     if not isinstance(myUse, User) or not isinstance(myHR,
                                                      int) or not isinstance(
-        myTi, list):
+            myTi, list):
         raise TypeError(
             "Error: Values did not match correct types. Please try again.")
     myUse.add_HR(myHR)
@@ -67,14 +68,14 @@ def addto_User(myUse, myHR, myTi):
 
 
 def checkNewU(us_ID):
-    """ This function takes the users id and checks to see if they exist in 
+    """ This function takes the users id and checks to see if they exist in
         memory.
 
     Args:
         us_email: String, of Users id
 
     Returns:
-        True and the object of given user if found, and False if user was not 
+        True and the object of given user if found, and False if user was not
             found.
 
 
@@ -114,14 +115,14 @@ def dataRetreiver(name, prop):
 
     Args:
         name: String, This is the users email address in String form
-        prop: String, This is the property of the User object that is being 
+        prop: String, This is the property of the User object that is being
             requested.
 
     Returns:
         Jsonified dictionary if user was found, along with proper exit code.
 
     Raises:
-        ValueError: If the email name entered does not match a current user, 
+        ValueError: If the email name entered does not match a current user,
             will return proper exit code.
 
     """
@@ -157,7 +158,7 @@ def dataRetreiver(name, prop):
 
 
 def timeSorter(myid, newt):
-    """ This function grab the patient id and time given and then finds the 
+    """ This function grab the patient id and time given and then finds the
         average over the interval.
 
     Args:
