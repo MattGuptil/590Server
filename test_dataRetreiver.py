@@ -1,5 +1,5 @@
 from user_class import User
-from server_methods import *
+from server import *
 import pytest
 import numpy as np
 
@@ -7,31 +7,34 @@ import numpy as np
 ## can only be called on an object and does not take anyinputs other than itself.
 
 
-@pytest.mark.parametrize('em, prp, expect', [
+@pytest.mark.parametrize('mid, prp, expect', [
 
-	('hold', 'AvgHR', {"Heart Rates": 0.0}),
-	('hold', 'HR', {"Heart Rates": np.array([1])}),
-	('hold', 'age', {"Heart Rates": 1}),
+	('1', 'AvgHR', {"Avg Heart Rate": 0.0}),
+	('1', 'HR', {"Heart Rates": np.array([1])}),
+	('1', 'status', False),
 	
 
 	])
-def test_dataRetreiver(em, prp, expect):
-	myobj = create_NewUser('hold', 1, 1, 0.0, ['str'])
+def test_dataRetreiver(mid, prp, expect):
+	myobj = create_NewUser('hold', 1, 1, 0.0, ['str'], '1')
 	myUsers.append(myobj)
-	mydict = dataRetreiver(em, prp)
+	mydict = dataRetreiver(mid, prp)
 
-	assert mydict == expect
+	if prp == 'status':
+		assert mydict['isTachy'] == expect
+	else:
+		assert mydict == expect
 
 
 @pytest.mark.parametrize('mobj, em, prp, expect', [
 
-	(create_NewUser('hold', 1, 1, 0.0, ['str']), 'hold', 'AvgHR', False),
-	(create_NewUser('hold', 1, 1, 0.0, ['str']), 'hold', 'HR', False),
-	(create_NewUser('hold', 1, 1, 0.0, ['str']), 'hold', 'age', False),
-	(create_NewUser('hold', 1, 1, 0.0, ['str']), 'hold1', 'age', True),
-	(create_NewUser('hold', 1, 1, 0.0, ['str']), 'hold', 'ag', True),
-	(create_NewUser('hold', 1, 1, 0.0, ['str']), 'hold', 21, True),
-	(create_NewUser('hold', 1, 1, 0.0, ['str']), 'hold1', [2], True),
+	(create_NewUser('hold', 1, 1, 0.0, ['str'], '1'), '1', 'AvgHR', False),
+	(create_NewUser('hold', 1, 1, 0.0, ['str'], '1'), '1', 'HR', False),
+	(create_NewUser('hold', 1, 1, 0.0, ['str'], '2'), '2', 'status', False),
+	(create_NewUser('hold', 1, 1, 0.0, ['str'], '3'), 'hold1', 'status', True),
+	(create_NewUser('hold', 1, 1, 0.0, ['str'], '3'), 'hold', 'ag', True),
+	(create_NewUser('hold', 1, 1, 0.0, ['str'], '4'), 'hold', 21, True),
+	(create_NewUser('hold', 1, 1, 0.0, ['str'], '5'), 'hold1', [2], True),
 	
 
 	])

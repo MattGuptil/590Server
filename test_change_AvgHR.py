@@ -11,7 +11,7 @@ import numpy as np
 
 	])
 def test_changeavgHR(oldahr, newahr):
-	myobj = create_NewUser('hold', 0, 1, oldahr, ['str'])
+	myobj = create_NewUser('hold', 0, 1, oldahr, ['str'], '1')
 
 	myobj.change_AvgHR(newahr)
 
@@ -37,7 +37,7 @@ def test_changeavgHR(oldahr, newahr):
 
 	])
 def test_changeAvgHR2(oldahr, newahr, expect):
-	myobj = create_NewUser('hold', 1, 1, oldahr, ['str'])
+	myobj = create_NewUser('hold', 1, 1, oldahr, ['str'], '1')
 
 	try:
 		myobj.change_AvgHR(newahr)

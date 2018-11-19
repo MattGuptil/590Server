@@ -1,7 +1,7 @@
 numpy
 flask
 requests
-json
+sendgrid
 datetime
 pytest
 pytest-cov

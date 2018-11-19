@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
-from server import myUsers
+import server
 
 def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
 	""" This function creates a new User object with associated input values.
@@ -24,7 +24,7 @@ def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
 	if not isinstance(myE, str) or not isinstance(myA, int) or not isinstance(myTi, list) or not isinstance(myAvg, float):
 		raise TypeError("Error: Values did not match correct types. Please try again.")
 	if not isinstance(myHR, int) and not isinstance(myHR, float):
-		raise TypeError("Error: Values did not match correct types. Please try again.")
+		raise TypeError("Error2: Values did not match correct types. Please try again.")
 	myHR = np.array([myHR])
 	x = User(myE, myA, myHR, myAvg, myTi, myID)
 	return x
@@ -51,12 +51,12 @@ def addto_User(myUse, myHR, myTi):
 	myArray = myUse.HR
 	if myArray[0] == 0:
 		myArray = np.delete(myArray, 0)
-	myU.HR = myArray ## this might have to change confirm it actually changes
-	myU = calcAv(myUse)
-	if myU.time[0] == ' ':
-		del myU.time[0]
+	myUse.HR = myArray ## this might have to change confirm it actually changes
+	myUse = calcAv(myUse)
+	if myUse.time[0] == ' ':
+		del myUse.time[0]
 
-	return myU
+	return myUse
 
 
 def checkNewU(us_ID):
@@ -74,11 +74,11 @@ def checkNewU(us_ID):
 	if not isinstance(us_ID, str) or us_ID is None:
 		raise TypeError("Error: Value entered was not a String. Can not be compared.")
 	i = 0
-	for key in myUsers:
+	for key in server.myUsers:
 		if key.id == us_ID:
 			return [True, key, i]
 		i = i + 1
-	return [False, 0]
+	return [False, server.myUsers]
 
 
 def calcAv(thisUser):
@@ -140,14 +140,27 @@ def dataRetreiver(name, prop):
 
 
 def timeSorter(myid, newt):
+	""" This function grab the patient id and time given and then finds the average over the interval.
 
+	Args:
+		myid: String, that reps patient id.
+		newt: String, represents the time that the user entered to find average time after this has occured.
+
+	Returns:
+		Dictionary containing avg value.
+
+	Raises:
+		ValueError: If the user does not exist.
+
+
+	"""
 	holder = checkNewU(myid)
 	if not holder[0]:
 		raise ValueError("Error: User does not currently exist, please first enter user data then attempt this.")
 	i = 0
 	j = 0
 	for each in holder[1].time:
-		myt = datetime.strptime(each, "%Y-%m-%d %I:%M:%S.%f")
+		myt = datetime.datetime.strptime(each, "%Y-%m-%d %I:%M:%S.%f")
 		if i == len(holder[1].time)-1:
 			j = -1
 			break
@@ -160,12 +173,14 @@ def timeSorter(myid, newt):
 		return {"Bad Date": 'Try Again'}
 
 	k = 0
+	z = 0
 	avgholder = 0.0
 	for each in holder[1].HR:
 		if k >= j:
 			avgholder = avgholder + each
+			z = z + 1
 		k = k + 1
-	avgholder = avgholder/float(len(avgholder))
+	avgholder = avgholder/float(z)
 
 	mydict = {'Avg Heart Rate over your Interval': avgholder}
 
@@ -173,6 +188,21 @@ def timeSorter(myid, newt):
 
 
 def isTachy(hr, age):
+	""" This function checks to see if the patient is tachycardic based on age and resting hr.
+
+	Args:
+		hr: int or numpyfloat, that reps last heart rate taken.
+		age: int, age of patient.
+
+	Returns:
+		True or False based on whether or not patient is tachy.
+
+
+	"""
+
+	if not isinstance(hr, np.int32) and not isinstance(hr, int) or not isinstance(age, int):
+		raise TypeError("Error: hr or age was not correct type.", type(hr))
+
 	if hr > 151 and age >=1 and age <= 2:
 		return True
 	elif hr >137 and age >=3 and age <= 4:
