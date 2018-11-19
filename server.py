@@ -4,9 +4,24 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
+from server_methods import *
 app = Flask(__name__)
 
 myUsers = [] ;
+
+
+@app.route("/status/<name>", methods = ["GET"])
+def get_status(name):
+	""" This GET function grabs the AvgHR for a user.
+
+	Returns:
+		A dictionary of the AvgHR in JSON dictionary form.
+
+	"""
+	myName = "{}".format(name)
+	myResults = dataRetreiver(myName, "status") ## Need to jsonify dictionary
+
+	return myResults
 
 
 @app.route("/heart_rate/average/<name>", methods = ["GET"])
@@ -37,9 +52,9 @@ def get_heartrate(name):
 	return myResults
 
 
-@app.route("/heart_rate", methods=["POST"])
-def heart_rate():
-	""" This is the POST function that allows a user to enter information.
+@app.route("/new_patient", methods=["POST"])
+def new_patient():
+	""" This is the POST function that allows a user to create/enter information.
 
 	Returns:
 		Nothing, simply stors the data given by user.		
@@ -49,21 +64,57 @@ def heart_rate():
 	r = request.get_json()
 
 	### add code to validate entries.
-	email = r['user_email']
-	HR = r['heart_rate']
+	email = r['attending_email']
+	#HR = r['heart_rate']
 	age = r['user_age']
+	age = int(age)
+	#time = datetime.datetime.now() ### gotta make this into a string....
+	#time = time.strftime("%Y-%m-%d %I:%M:%S.%f")
+	myID = r['patient_id']
+
+	newUser = checkNewU(myID)
+	if not newUser[0]:
+		myU = create_NewUser(email, 0, age, 60, [' '], myID)
+	else:
+		raise ValueError("patient_id exists please use a different patient_id")
+		
+	myUsers.append(myU)
+	return
+
+
+@app.route("/heart_rate", methods=["POST"])
+def heart_rate():
+	""" This is the POST function that allows a user to Post HR data.
+
+	Returns:
+		Nothing, just posts HR data to user while checking to make sure default values are removed.		
+
+
+	"""
+	r = request.get_json()
+
+	myid = r['patient_id']
+	myhr = r['hear_rate']
+	myhr = int(myhr)
 	time = datetime.datetime.now() ### gotta make this into a string....
 	time = time.strftime("%Y-%m-%d %I:%M:%S.%f")
 
-	newUser = checkNewU(email)
+	newUser = checkNewU(myid)
+	myU = newUser[1]
 	if not newUser[0]:
-		myU = create_NewUser(email, HR, age, 60, time)
+		raise ValueError("User does not yet exist try another patient id or create a new user.")
 	else:
-		myU = addto_User(newUser[1], HR, age, time)
+		myU = addto_User(myU, myHR, [myTi])
+		del myUsers[newUser[2]]
+		myUsers.append(myU)
 
-	myU = calcAv(myU)
-	myUsers.append(myU)
+
+	isTac = isTachy(myhr, myU.age)
+	#if isTac:
+		###send an email
+
 	return
+
 
 @app.route("/heart_rate/interval_average", methods=["POST"])
 def interval_average():
@@ -76,11 +127,11 @@ def interval_average():
 	"""
 	r = request.get_json()
 
-	email = r['user_email']
+	myid = r['patient_id']
 	trange = r['hear_rate_average_since']
 
 	newt = datetime.strptime(trange, "%Y-%m-%d %I:%M:%S.%f")
-	mydict = timeSorter(email,newt)
+	mydict = timeSorter(myid,newt)
 
 	return jsonify(mydict), 200
 

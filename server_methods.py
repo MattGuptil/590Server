@@ -6,7 +6,7 @@ import requests
 import json
 from server import myUsers
 
-def create_NewUser(myE, myHR, myA, myAvg, myTi):
+def create_NewUser(myE, myHR, myA, myAvg, myTi, myID):
 	""" This function creates a new User object with associated input values.
 
 	Args:
@@ -26,16 +26,15 @@ def create_NewUser(myE, myHR, myA, myAvg, myTi):
 	if not isinstance(myHR, int) and not isinstance(myHR, float):
 		raise TypeError("Error: Values did not match correct types. Please try again.")
 	myHR = np.array([myHR])
-	x = User(myE, myA, myHR, myAvg, myTi)
+	x = User(myE, myA, myHR, myAvg, myTi, myID)
 	return x
 
 ## add code for average later
-def addto_User(myUse, myHR, myA, myTi):
+def addto_User(myUse, myHR, myTi):
 	""" This function takes in a User object and changes age, and appends time/HR.
 
 	Args:
 		myUse: User object that will be modified.
-		myA: Int Age of user that will be added.
 		myHR: Float HR of user that will be appended to numpy array.
 		myTi: String of time that will be appended to time list.
 
@@ -44,31 +43,41 @@ def addto_User(myUse, myHR, myA, myTi):
 
 
 	"""
-	if not isinstance(myUse, User) or not isinstance(myHR, int) or not isinstance(myA, int) or not isinstance(myTi, list):
+	if not isinstance(myUse, User) or not isinstance(myHR, int) or not isinstance(myTi, list):
 		raise TypeError("Error: Values did not match correct types. Please try again.")
-	myUse.change_age(myA)
 	myUse.add_HR(myHR)
 	myUse.add_time(myTi)
-	return myUse
+
+	myArray = myUse.HR
+	if myArray[0] == 0:
+		myArray = np.delete(myArray, 0)
+	myU.HR = myArray ## this might have to change confirm it actually changes
+	myU = calcAv(myUse)
+	if myU.time[0] == ' ':
+		del myU.time[0]
+
+	return myU
 
 
-def checkNewU(us_email):
-	""" This function takes the users email and checks to see if they exist in memory.
+def checkNewU(us_ID):
+	""" This function takes the users id and checks to see if they exist in memory.
 
 	Args:
-		us_email: String, of Users email
+		us_email: String, of Users id
 
 	Returns:
 		True and the object of given user if found, and False if user was not found.
 
 
 	"""
-	
-	if not isinstance(us_email, str) or us_email is None:
+	## might have to remove user then add it back
+	if not isinstance(us_ID, str) or us_ID is None:
 		raise TypeError("Error: Value entered was not a String. Can not be compared.")
+	i = 0
 	for key in myUsers:
-		if key.email == us_email:
-			return [True, key]
+		if key.id == us_ID:
+			return [True, key, i]
+		i = i + 1
 	return [False, 0]
 
 
@@ -112,21 +121,27 @@ def dataRetreiver(name, prop):
 	myObj = myResults[1]
 	if prop == "AvgHR":
 		myData = myObj.AvgHR
+		myDir = {"Avg Heart Rate": myData} ## probable have to add {}".format(myData)
 	elif prop == "HR":
 		myData = myObj.HR
-	elif prop == "age":
-		myData = myObj.age
+		myDir = {"Heart Rates": myData} ## probable have to add {}".format(myData)
+	elif prop == "status":
+		myl = len(myObj.HR) - 1
+		myData = myObj.HR[myl]
+		myage = myObj.age
+		myData = isTachy(myData, myage)
+		myDir = {"isTachy": myData, "Time": myObj.time[myl]} ## probable have to add {}".format(myData)
 	else:
 		raise ValueError("Fatal: A valid object property was not called. Debugging Needed.")
 	
-	myDir = {"Heart Rates": myData} ## probable have to add {}".format(myData)
+	
 
 	return myDir
 
 
-def timeSorter(email, newt):
+def timeSorter(myid, newt):
 
-	holder = checkNewU(email)
+	holder = checkNewU(myid)
 	if not holder[0]:
 		raise ValueError("Error: User does not currently exist, please first enter user data then attempt this.")
 	i = 0
@@ -155,3 +170,20 @@ def timeSorter(email, newt):
 	mydict = {'Avg Heart Rate over your Interval': avgholder}
 
 	return mydict ## look at other code to jsonify
+
+
+def isTachy(hr, age):
+	if hr > 151 and age >=1 and age <= 2:
+		return True
+	elif hr >137 and age >=3 and age <= 4:
+		return True
+	elif hr >133 and age >=5 and age <= 7:
+		return True
+	elif hr >130 and age >=8 and age <= 11:
+		return True
+	elif hr >119 and age >=12 and age <= 15:
+		return True
+	elif hr >100 and age >=15:
+		return True
+	else:
+		return False
