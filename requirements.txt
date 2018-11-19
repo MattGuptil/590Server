@@ -1,2 +1,8 @@
 numpy
 flask
+requests
+json
+datetime
+pytest
+pytest-cov
+pytest-pep8
