@@ -11,7 +11,7 @@ import numpy as np
 
 	])
 def test_changeage(oldage,newage):
-	myobj = create_NewUser('hold', 1, oldage, 0.0, 'str')
+	myobj = create_NewUser('hold', 1, oldage, 0.0, ['str'])
 
 	myobj.change_age(newage)
 
@@ -33,7 +33,7 @@ def test_changeage(oldage,newage):
 
 	])
 def test_changeage2(oldage, newage, expect):
-	myobj = create_NewUser('hold', 1, oldage, 0.0, 'str')
+	myobj = create_NewUser('hold', 1, oldage, 0.0, ['str'])
 
 	try:
 		myobj.change_age(newage)

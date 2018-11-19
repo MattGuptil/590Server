@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
+from server import myUsers
 
 def create_NewUser(myE, myHR, myA, myAvg, myTi):
 	""" This function creates a new User object with associated input values.
@@ -20,7 +21,9 @@ def create_NewUser(myE, myHR, myA, myAvg, myTi):
 
 
 	"""
-	if not isinstance(myE, str) or not isinstance(myA, int) or not isinstance(myTi, str) or not isinstance(myAvg, float):
+	if not isinstance(myE, str) or not isinstance(myA, int) or not isinstance(myTi, list) or not isinstance(myAvg, float):
+		raise TypeError("Error: Values did not match correct types. Please try again.")
+	if not isinstance(myHR, int) and not isinstance(myHR, float):
 		raise TypeError("Error: Values did not match correct types. Please try again.")
 	myHR = np.array([myHR])
 	x = User(myE, myA, myHR, myAvg, myTi)
@@ -41,7 +44,7 @@ def addto_User(myUse, myHR, myA, myTi):
 
 
 	"""
-	if not isinstance(myUse, User) or not isinstance(myHR, int) or not isinstance(myA, int) or not isinstance(myTi, str):
+	if not isinstance(myUse, User) or not isinstance(myHR, int) or not isinstance(myA, int) or not isinstance(myTi, list):
 		raise TypeError("Error: Values did not match correct types. Please try again.")
 	myUse.change_age(myA)
 	myUse.add_HR(myHR)
@@ -60,10 +63,11 @@ def checkNewU(us_email):
 
 
 	"""
+	
 	if not isinstance(us_email, str) or us_email is None:
 		raise TypeError("Error: Value entered was not a String. Can not be compared.")
 	for key in myUsers:
-		if key.email() == us_email:
+		if key.email == us_email:
 			return [True, key]
 	return [False, 0]
 
@@ -117,4 +121,4 @@ def dataRetreiver(name, prop):
 	
 	myDir = {"Heart Rates": myData} ## probable have to add {}".format(myData)
 
-	return jsonify(myDir), 200
+	return myDir

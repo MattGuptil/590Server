@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
+app = Flask(__name__)
 
 myUsers = [] ;
 
@@ -17,11 +18,11 @@ def get_avgHR(name):
 
 	"""
 	myName = "{}".format(name)
-	myResults = dataRetreiver(myName, "AvgHR")
+	myResults = dataRetreiver(myName, "AvgHR") ## Need to jsonify dictionary
 
 	return myResults
 
-@app.route("heart_rate/<name>", methods = ["GET"])
+@app.route("/heart_rate/<name>", methods = ["GET"])
 def get_heartrate(name):
 	""" This GET function grabs the heart rate data of the user entered.
 
@@ -31,7 +32,7 @@ def get_heartrate(name):
 
 	"""
 	myName = "{}".format(name)
-	myResults = dataRetreiver(myName, "HR")
+	myResults = dataRetreiver(myName, "HR") ## jsonify dictionary ## see note on line 122 of server_methods
 
 	return myResults
 
@@ -51,7 +52,8 @@ def heart_rate():
 	email = r['user_email']
 	HR = r['heart_rate']
 	age = r['user_age']
-	time = datetime.datetime.now()
+	time = datetime.datetime.now() ### gotta make this into a string....
+	time = time.strftime("%Y-%m-%d %I:%M:%S.%f")
 
 	newUser = checkNewU(email)
 	if not newUser[0]:
