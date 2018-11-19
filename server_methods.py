@@ -122,3 +122,36 @@ def dataRetreiver(name, prop):
 	myDir = {"Heart Rates": myData} ## probable have to add {}".format(myData)
 
 	return myDir
+
+
+def timeSorter(email, newt):
+
+	holder = checkNewU(email)
+	if not holder[0]:
+		raise ValueError("Error: User does not currently exist, please first enter user data then attempt this.")
+	i = 0
+	j = 0
+	for each in holder[1].time:
+		myt = datetime.strptime(each, "%Y-%m-%d %I:%M:%S.%f")
+		if i == len(holder[1].time)-1:
+			j = -1
+			break
+		if newt <= myt :
+			j = i
+			break
+		i= i+1
+
+	if j == -1:
+		return {"Bad Date": 'Try Again'}
+
+	k = 0
+	avgholder = 0.0
+	for each in holder[1].HR:
+		if k >= j:
+			avgholder = avgholder + each
+		k = k + 1
+	avgholder = avgholder/float(len(avgholder))
+
+	mydict = {'Avg Heart Rate over your Interval': avgholder}
+
+	return mydict ## look at other code to jsonify

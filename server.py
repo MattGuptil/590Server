@@ -65,5 +65,26 @@ def heart_rate():
 	myUsers.append(myU)
 	return
 
+@app.route("/heart_rate/interval_average", methods=["POST"])
+def interval_average():
+	""" This is the POST function that allows a user to get HR average over interval.
+
+	Returns:
+		Dictionary jsonified, of the average heart rate over an interval.		
+
+
+	"""
+	r = request.get_json()
+
+	email = r['user_email']
+	trange = r['hear_rate_average_since']
+
+	newt = datetime.strptime(trange, "%Y-%m-%d %I:%M:%S.%f")
+	mydict = timeSorter(email,newt)
+
+	return jsonify(mydict), 200
+
+
+
 if __name__ == '__main__':
 	app.run(host="0.0.0.0")
