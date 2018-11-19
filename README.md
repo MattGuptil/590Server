@@ -16,7 +16,7 @@ Notes:
     The file server.py contains all the flask functions as well as all the helper functions that it uses. There is a separate file
     call server_methods that has the same methods as server.py but server_methods is called for unit tests.
     
-    Tests are spread out for each function there are like 111 tests. There are 2 functions that are not tested these are emailTac and validate_request. emailTac is tested through testserver2.py and testmyserver.py. This is because this is a sendgrid function and I can not verify programatically so I did it manually. validate_request is not tested because this code was taken from Suyash's server implementation that was demonstrated in class. Furthermore this function uses the flask requests objects and we don't need to test the flask stuff.
+Tests are spread out for each function there are like 111 tests. There are 2 functions that are not tested these are emailTac and validate_request. emailTac is tested through testserver2.py and testmyserver.py. This is because this is a sendgrid function and I can not verify programatically so I did it manually. validate_request is not tested because this code was taken from Suyash's server implementation that was demonstrated in class. Furthermore this function uses the flask requests objects and we don't need to test the flask stuff.
     
  Also emails will be sent when patient properly goes tachycardic, so watch for the emails only when you knowingly push the HR up.
  
