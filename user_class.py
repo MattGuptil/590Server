@@ -30,7 +30,8 @@ class User(object):
 
         if not isinstance(new_age, int) or new_age is None:
             raise TypeError(
-                "Error: Age Entered was not an integer. Please Input a correct age.")
+                "Error: Age Entered was not an integer. Please Input a correct"
+                " age.")
         self.age = new_age
 
     def change_id(self, new_id):
@@ -48,7 +49,8 @@ class User(object):
 
         if not isinstance(new_id, int) or new_id is None:
             raise TypeError(
-                "Error: Age Entered was not an integer. Please Input a correct age.")
+                "Error: Age Entered was not an integer. Please Input a correct"
+                " age.")
         self.id = new_id
 
     def add_HR(self, new_HR):
@@ -111,7 +113,8 @@ class User(object):
                 self: The object that heart rate data will be taken from.
 
         Returns:
-                Nothing, just changes the average heart rate value which is a float64
+                Nothing, just changes the average heart rate value which is a
+                    float64
 
         """
         myData = self.HR

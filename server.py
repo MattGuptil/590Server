@@ -433,7 +433,8 @@ def isTachy(hr, age):
     """
 
     if not isinstance(hr, np.int32) and not isinstance(hr,
-                                                       int) or not isinstance(
+                                                       int) and not isinstance(hr,
+                                                        np.int64) or not isinstance(
             age, int):
         raise TypeError("Error: hr or age was not correct type.", type(hr))
 
