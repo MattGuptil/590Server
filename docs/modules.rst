@@ -4,8 +4,10 @@
 .. toctree::
    :maxdepth: 4
 
+   mysend
    server
    server_methods
+   stringkey
    test_add_HR
    test_add_time
    test_addtoUser
@@ -19,4 +21,6 @@
    test_isTachy
    test_timeSorter
    testmyserver
+   testserver2
+   testtimeserver
    user_class

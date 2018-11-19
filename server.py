@@ -4,6 +4,9 @@ from flask import Flask, jsonify, request
 import datetime
 import requests
 import json
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
 #from server_methods import *
 app = Flask(__name__)
 
@@ -127,8 +130,8 @@ def heart_rate():
 
 
 	isTac = isTachy(myhr, myU.age)
-	#if isTac:
-		###send an email
+	if isTac:
+		emailTac(myU.email)
 
 	return jsonify({'Num users': len(myUsers), 'Newuse': isTac}), 200
 
@@ -154,6 +157,32 @@ def interval_average():
 	mydict = timeSorter(myid,newt)
 
 	return jsonify(mydict), 200
+
+def emailTac(myem):
+	""" This function will email the attending physician and warn of Tachy.
+
+	Args:
+		myem: string of email for attending physician.
+
+	Returns:
+		Nothing, just sends out the email.
+
+
+	"""
+	from stringkey import sg as sg
+
+	from_email = Email("test@example.com")
+	to_email = Email("matthew.guptil@duke.edu")
+	subject = "Patient going Tachy!"
+	content = Content("text/plain", "Alert: Please attend to patient, they are showing signs of Tachy")
+	mail = Mail(from_email, subject, to_email, content)
+	response = sg.client.mail.send.post(request_body=mail.get())
+	print(response.status_code)
+	print(response.body)
+	print(response.headers)
+
+	return
+
 
 
 def validate_request(req):
