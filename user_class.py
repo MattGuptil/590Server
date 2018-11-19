@@ -28,7 +28,10 @@ class User(object):
 
 
 		"""
-		self.__age = new_age
+
+		if not isinstance(new_age, int) or new_age is None:
+			raise TypeError("Error: Age Entered was not an integer. Please Input a correct age.")
+		self.age = new_age
 
 
 	def add_HR(self,new_HR):
@@ -43,7 +46,9 @@ class User(object):
 
 
 		"""
-		self.__HR = np.append(self.HR, new_HR) 
+		if not isinstance(new_HR, int) or new_HR is None:
+			raise TypeError("Error: HR entered was not an integer.")
+		self.HR = np.append(self.HR, new_HR) 
 
 
 	def change_AvgHR(self,new_AvgHR):
@@ -58,7 +63,9 @@ class User(object):
 
 
 		"""
-		self.__AvgHR = new_AvgHR 
+		if not isinstance(new_AvgHR, int) or new_AvgHR is None:
+			raise TypeError("Error: AvgHR entered was not an integer.")
+		self.AvgHR = new_AvgHR 
 
  
 	def add_time(self,new_time):
@@ -73,8 +80,10 @@ class User(object):
 
 
 		"""
+		if not isinstance(new_time, str) or new_time is None:
+			raise TypeError("Error: Time entered was not a string.")
 		myT = self.time
-		self.__time = myT.append(new_time) 
+		self.time = myT.append(new_time) 
 
 
 	def calc_AvgHR(self):
@@ -89,4 +98,4 @@ class User(object):
 		"""
 		myData = self.HR
 		myAv = np.mean(myData)
-		self.__AvgHR = myAv
+		self.AvgHR = myAv
